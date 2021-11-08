@@ -44,6 +44,7 @@ public class NightShadeVersionDetailPreferenceController extends BasePreferenceC
 
     private static final String KEY_NIGHTSHADE_VERSION_PROP = "ro.modversion";
     private static final String KEY_NIGHTSHADE_RELEASETYPE_PROP = "ro.nightshade.releasetype";
+    private static final String KEY_NIGHTSHADE_ZIPTYPE_PROP = "ro.nightshade.ziptype";
 
     private final UserManager mUserManager;
     private final long[] mHits = new long[ACTIVITY_TRIGGER_COUNT];
@@ -66,8 +67,10 @@ public class NightShadeVersionDetailPreferenceController extends BasePreferenceC
     public CharSequence getSummary() {
 	String[] nightshadeVer = SystemProperties.get(KEY_NIGHTSHADE_VERSION_PROP).split("v");
 	String nightshadeReleasetype =  SystemProperties.get(KEY_NIGHTSHADE_RELEASETYPE_PROP);
-	if (!nightshadeVer[1].isEmpty() && !nightshadeReleasetype.isEmpty())
-	    return nightshadeVer[1] + " | " + nightshadeReleasetype;
+        String nightshadeZiptype =  SystemProperties.get(KEY_NIGHTSHADE_ZIPTYPE_PROP);
+
+	if (!nightshadeVer[1].isEmpty() && !nightshadeReleasetype.isEmpty() && !nightshadeZiptype.isEmpty())
+	    return nightshadeVer[1] + " | " + nightshadeZiptype + " | " + nightshadeReleasetype;
 	else
             return mContext.getString(R.string.unknown);
     }
